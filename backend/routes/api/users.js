@@ -9,6 +9,14 @@ const { handleValidationErrors } = require('../../utils/validation');
 const router = express.Router();
 
 const validateSignup = [
+    check('firstName')
+        .exists({ checkFalsy: true })
+        .isLength({ max: 50 })
+        .withMessage('Please provide a first name under 50 character.'),
+    check('lastName')
+        .exists({ checkFalsy: true })
+        .isLength({ max: 50 })
+        .withMessage('Please provide a last name under 50 character.'),
     check('email')
         .exists({ checkFalsy: true })
         .isEmail()
@@ -31,8 +39,8 @@ const validateSignup = [
 // Sign up
 router.post(
     '/', validateSignup, asyncHandler(async (req, res) => {
-        const { email, password, username } = req.body;
-        const user = await User.signup({ email, username, password });
+        const { firstName, lastName, username, email, password} = req.body;
+        const user = await User.signup({ firstName, lastName, username, email, password });
 
         await setTokenCookie(res, user);
 
@@ -41,5 +49,17 @@ router.post(
         });
     }),
 );
+
+// Gets all users
+router.get('/', asyncHandler(async (req, res) => {
+    const users = await User.findAll();
+    console.log(users);
+    return res.json(users);
+}))
+
+// Get a user by ID
+router.get('/:id\\d+', asyncHandler(async (req, res) => {
+    const id = req.params.id
+}))
 
 module.exports = router;

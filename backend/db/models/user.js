@@ -5,6 +5,20 @@ const bcrypt = require('bcryptjs');
 
 module.exports = (sequelize, DataTypes) => {
   const User = sequelize.define('User', {
+    firstName: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        len: [3, 50]
+      }
+    },
+    lastName: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        len: [3, 50]
+      }
+    },
     username: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -30,6 +44,10 @@ module.exports = (sequelize, DataTypes) => {
       validate: {
         len: [60,60]
       }
+    },
+    avatarUrl: {
+      type: DataTypes.STRING,
+      allowNull: false
     }
   }, {
     defaultScope: {
@@ -76,11 +94,14 @@ module.exports = (sequelize, DataTypes) => {
     }
   };
 
-  User.signup = async function ({ username, email, password }) {
+  User.signup = async function ({ firstName, lastName, username, email, password }) {
     const hashedPassword = bcrypt.hashSync(password);
     const user = await User.create({
+      firstName,
+      lastName,
       username,
       email,
+      avatarUrl: '/img/default.png',
       hashedPassword
     });
     return await User.scope('currentUser').findByPk(user.id);
@@ -88,6 +109,15 @@ module.exports = (sequelize, DataTypes) => {
 
   User.associate = function(models) {
     // associations can be defined here
+    const columnMappingSong = {
+      as: 'LikedSongs',
+      through: 'Song_Vote',
+      foreignKey: 'userId', 
+      otherKey: 'songId'
+    };
+    User.hasMany(models.Song, { foreignKey: 'userId' });
+    User.belongsToMany(models.Song, columnMappingSong);
+    User.hasMany(models.Playlist, { foreignKey: 'userId' });
   };
 
   return User;
