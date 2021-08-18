@@ -4,42 +4,42 @@ module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.bulkInsert('Songs', [
       {
-        title: 'Fuck Kristian He Sucks',
+        title: 'Really Cool Song',
         length: 221,
         songUrl: './assets/song.mp3',
         artworkUrl: './assets/image.png',
         userId: 2,
       },
       {
-        title: 'Fuck Kristian He Sucks 2',
+        title: 'Even Better Song',
         length: 198,
         songUrl: './assets/song.mp3',
         artworkUrl: './assets/image.png',
         userId: 2,
       },
       {
-        title: 'Fuck Kristian He Sucks 3',
+        title: 'Beach Vibes',
         length: 52,
         songUrl: './assets/song.mp3',
         artworkUrl: './assets/image.png',
         userId: 1,
       },
       {
-        title: 'Fuck Kristian He Sucks 4',
+        title: 'Gorilla Jungle Beats',
         length: 154,
         songUrl: './assets/song.mp3',
         artworkUrl: './assets/image.png',
         userId: 4,
       },
       {
-        title: 'Fuck Kristian He Sucks 5',
+        title: 'Wonderwall (cover)',
         length: 986,
         songUrl: './assets/song.mp3',
         artworkUrl: './assets/image.png',
         userId: 5,
       },
       {
-        title: 'Fuck Kristian He Sucks 6',
+        title: 'The Sound of Quietness',
         length: 12,
         songUrl: './assets/song.mp3',
         artworkUrl: './assets/image.png',

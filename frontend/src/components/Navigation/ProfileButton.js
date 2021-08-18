@@ -1,6 +1,7 @@
 
 
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom"
 import { useDispatch } from 'react-redux';
 import * as sessionActions from '../../store/session';
 
@@ -38,6 +39,8 @@ function ProfileButton({ user }) {
             </button>
             {showMenu && (
                 <ul className="profile-dropdown">
+                    <li><Link to={`/users/${user.id}`}>Profile</Link></li>
+                    <li><Link to='/songs/liked'>Likes</Link></li>
                     <li>{user.username}</li>
                     <li>{user.email}</li>
                     <li>

@@ -53,7 +53,7 @@ router.post(
 // Gets all users
 router.get('/', asyncHandler(async (req, res) => {
     const users = await User.findAll({
-        include: [ Song, Playlist, 'LikedSongs' ]
+        include: [ Song, {model: Playlist, include: Song}, 'LikedSongs' ]
     });
     return res.json(users);
 }))

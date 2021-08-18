@@ -2,7 +2,7 @@ import React from "react"
 import { Route, Link } from "react-router-dom"
 import UserPage from "../UserPage"
 
-const UsersList = ({ users }) => {
+const UsersPage = ({ users }) => {
 
     return (
         <>
@@ -20,4 +20,4 @@ const UsersList = ({ users }) => {
     )
 }
 
-export default UsersList
+export default UsersPage

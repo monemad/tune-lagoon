@@ -5,7 +5,9 @@ import LoginFormPage from './components/LoginFormPage';
 import SignupFormPage from './components/SignupFormPage';
 import * as sessionActions from './store/session';
 import Navigation from './components/Navigation';
-import UsersList from './components/UsersList'
+import UsersPage from './components/UsersPage'
+import PlaylistsPage from './components/PlaylistsPage';
+import SongsPage from './components/SongsPage';
 import { getUsers } from "./store/users"
 import { getSongs } from './store/songs';
 
@@ -27,17 +29,30 @@ function App() {
       <Navigation isLoaded={isLoaded} />
       {isLoaded && (
         <Switch>
-        <Route path='/login'>
-          <LoginFormPage />
-        </Route>
-        <Route path='/signup'>
-          <SignupFormPage />
-        </Route>
-        <Route path='/users'>
-          <UsersList users={users}/>
-        </Route>
-      </Switch>
+          <Route exact path='/'>
+            Home
+          </Route>
+          <Route path='/login'>
+            <LoginFormPage />
+          </Route>
+          <Route path='/signup'>
+            <SignupFormPage />
+          </Route>
+          <Route path='/users'>
+            <UsersPage users={users}/>
+          </Route>
+          <Route path='/songs'>
+            <SongsPage />
+          </Route>
+          <Route path='/playlists'>
+            <PlaylistsPage />
+          </Route>
+          <Route>
+            Page Not Found! 😥
+          </Route>
+        </Switch>
       )}
+      <footer>Footer</footer>
     </>
   );
 }

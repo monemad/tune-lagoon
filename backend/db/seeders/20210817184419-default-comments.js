@@ -23,7 +23,7 @@ module.exports = {
         userId: 2
       },
       {
-        content: 'This really made me FEEL like Kristian 0/10',
+        content: 'This really made me FEEL like Batman. Got a little something for everyone 8/10',
         timeElapsed: 62,
         songId: 4,
         userId: 4
