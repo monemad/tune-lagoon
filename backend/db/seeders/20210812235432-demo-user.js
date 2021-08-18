@@ -14,9 +14,25 @@ module.exports = {
         avatarUrl: '/img/default.png',
       },
       {
+        firstName: 'Ivy',
+        lastName: 'Huynh',
+        username: 'WellHelloIvy',
+        email: 'sexiibaybee420@gmail.com',
+        hashedPassword: bcrypt.hashSync('password'),
+        avatarUrl: '/img/default.png',
+      },
+      {
+        firstName: 'Kristian',
+        lastName: 'Martinez',
+        username: 'slimy_balls',
+        email: 'kris@martin.com',
+        hashedPassword: bcrypt.hashSync('password'),
+        avatarUrl: '/img/default.png',
+      },
+      {
         firstName: faker.name.firstName(),
         lastName: faker.name.lastName(),
-        username: 'FakeUser1',
+        username: faker.internet.userName(),
         email: faker.internet.email(),
         hashedPassword: bcrypt.hashSync(faker.internet.password()),
         avatarUrl: '/img/default.png'
@@ -24,7 +40,23 @@ module.exports = {
       {
         firstName: faker.name.firstName(),
         lastName: faker.name.lastName(),
-        username: 'FakeUser2',
+        username: faker.internet.userName(),
+        email: faker.internet.email(),
+        hashedPassword: bcrypt.hashSync(faker.internet.password()),
+        avatarUrl: '/img/default.png'
+      },
+      {
+        firstName: faker.name.firstName(),
+        lastName: faker.name.lastName(),
+        username: faker.internet.userName(),
+        email: faker.internet.email(),
+        hashedPassword: bcrypt.hashSync(faker.internet.password()),
+        avatarUrl: '/img/default.png'
+      },
+      {
+        firstName: faker.name.firstName(),
+        lastName: faker.name.lastName(),
+        username: faker.internet.userName(),
         email: faker.internet.email(),
         hashedPassword: bcrypt.hashSync(faker.internet.password()),
         avatarUrl: '/img/default.png'
@@ -34,8 +66,6 @@ module.exports = {
 
   down: (queryInterface, Sequelize) => {
     const Op = Sequelize.Op;
-    return queryInterface.bulkDelete('Users', {
-      username: { [Op.in]: ['Demo-lition', 'FakeUser1', 'FakeUser2'] }
-    }, {});
+    return queryInterface.bulkDelete('Users', null, {truncate: true, cascade: true, restartIdentity: true});
   }
 };

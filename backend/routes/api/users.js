@@ -3,7 +3,7 @@ const asyncHandler = require('express-async-handler');
 const { check } = require('express-validator');
 
 const { setTokenCookie, requireAuth } = require('../../utils/auth');
-const { User } = require('../../db/models');
+const { User, Song, Comment, Playlist } = require('../../db/models');
 const { handleValidationErrors } = require('../../utils/validation');
 
 const router = express.Router();
@@ -52,8 +52,9 @@ router.post(
 
 // Gets all users
 router.get('/', asyncHandler(async (req, res) => {
-    const users = await User.findAll();
-    console.log(users);
+    const users = await User.findAll({
+        include: [ Song, Playlist, 'LikedSongs' ]
+    });
     return res.json(users);
 }))
 

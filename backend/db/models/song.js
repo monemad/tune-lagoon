@@ -9,7 +9,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER,
       allowNull: false
     },
-    songURl: {
+    songUrl: {
       type: DataTypes.STRING,
       allowNull: false
     },
@@ -25,7 +25,7 @@ module.exports = (sequelize, DataTypes) => {
   Song.associate = function(models) {
     // associations can be defined here
     const columnMappingUser = {
-      as: 'UsersThatLiked',
+      as: 'SongVotes',
       through: 'Song_Vote',
       foreignKey: 'songId', 
       otherKey: 'userId'

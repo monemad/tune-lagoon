@@ -7,6 +7,7 @@ import * as sessionActions from './store/session';
 import Navigation from './components/Navigation';
 import UsersList from './components/UsersList'
 import { getUsers } from "./store/users"
+import { getSongs } from './store/songs';
 
 function App() {
   const dispatch = useDispatch();
@@ -18,6 +19,7 @@ function App() {
     dispatch(sessionActions.restoreUser())
       .then(()=> setIsLoaded(true));
     dispatch(getUsers());
+    dispatch(getSongs());
   }, [dispatch])
 
   return (
