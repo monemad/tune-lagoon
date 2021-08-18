@@ -10,6 +10,7 @@ import PlaylistsPage from './components/PlaylistsPage';
 import SongsPage from './components/SongsPage';
 import { getUsers } from "./store/users"
 import { getSongs } from './store/songs';
+import { getPlaylists } from './store/playlists';
 
 function App() {
   const dispatch = useDispatch();
@@ -22,6 +23,7 @@ function App() {
       .then(()=> setIsLoaded(true));
     dispatch(getUsers());
     dispatch(getSongs());
+    dispatch(getPlaylists());
   }, [dispatch])
 
   return (
@@ -52,7 +54,7 @@ function App() {
           </Route>
         </Switch>
       )}
-      <footer>Footer</footer>
+      <footer>Music Player Footer</footer>
     </>
   );
 }

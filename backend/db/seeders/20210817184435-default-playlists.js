@@ -5,12 +5,12 @@ module.exports = {
     
     return queryInterface.bulkInsert('Playlists', [
       {
-        name: 'I hate Kristian',
+        name: 'My Special Jam',
         private: false,
         userId: 2
       },
       {
-        name: 'Me too!',
+        name: 'Gud songs!',
         private: false,
         userId: 6
       },
