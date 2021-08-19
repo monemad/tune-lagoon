@@ -22,5 +22,8 @@
   "bugs": {
     "url": "https://github.com/monemad/tune-lagoon/issues"
   },
-  "homepage": "https://github.com/monemad/tune-lagoon#readme"
+  "homepage": "https://github.com/monemad/tune-lagoon#readme",
+  "dependencies": {
+    "react-h5-audio-player": "^3.7.1"
+  }
 }

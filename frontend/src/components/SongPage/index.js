@@ -16,7 +16,7 @@ const SongPage = ({ songs }) => {
                 <div className='song-comments'>
                     <h3>Comments</h3>
                     <ul className='song-comments-div'>
-                        {song && song.Comments.map(comment => <li key={comment.id}>{comment.content}<span className='comment-author'> -<Link to={`/users/${comment.userId}`}>{users.find(user => user.id === comment.userId).username}</Link></span></li>)}
+                        {song && song.Comments.map(comment => <li key={comment.id}>{comment.content}<span className='comment-author'> -<Link to={`/users/${comment.userId}`}>{comment.User.username}</Link></span></li>)}
                     </ul>
                 </div>
             </div>

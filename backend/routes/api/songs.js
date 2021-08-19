@@ -8,7 +8,7 @@ const router = express.Router();
 router.get('/', asyncHandler(async (req, res) => {
     console.log('in the get /api/songs')
     const songs = await Song.findAll({
-        include: [ User, Comment, Genre, 'SongVotes' ]
+        include: [ User, {model: Comment, include: User}, Genre, 'SongVotes' ]
     })
     return res.json(songs);
 }))

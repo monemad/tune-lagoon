@@ -1,7 +1,8 @@
 import React from 'react'
 import { useSelector } from 'react-redux';
-import { useParams } from 'react-router';
+import { Route, useParams } from 'react-router';
 import { Link } from 'react-router-dom';
+import EditUserDetails from '../EditUserDetails';
 
 const UserPage = ({ users }) => {
     const session = useSelector(state => state.session);
@@ -15,7 +16,10 @@ const UserPage = ({ users }) => {
                 <h2>{user.username}</h2>
                 <div className='user-details'>
                     <p>{user.firstName} {user.lastName}</p>
-                    {authorized ? <p>Edit Profile</p> : <></>}
+                    {authorized ? <Link to={`/users/${user.id}/edit`}>Edit Profile</Link> : <></>}
+                    <Route path='/users/:userId/edit'>
+                        <EditUserDetails user={user}/>
+                    </Route>
                 </div>
                 <div className='user-songs'>
                     <h3>Songs</h3>
