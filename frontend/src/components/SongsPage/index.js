@@ -10,9 +10,7 @@ const SongsPage = () => {
         <>
             <Route exact path='/songs'>
                 <div className='songs-page'>
-                    <ul className='songs-list'>
-                        {songs.map(song => <li key={song.id}><Link to={`/songs/${song.id}`}>{song.title}</Link></li>)}
-                    </ul>
+                    {songs.map(song => <div className='song-div' key={song.id}><Link to={`/songs/${song.id}`}>{song.title}</Link></div>)}
                 </div>
             </Route>
             <Route path='/songs/:songId'>

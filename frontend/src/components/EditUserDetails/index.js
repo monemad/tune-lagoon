@@ -9,6 +9,7 @@ const EditUserDetails = ({ user }) => {
     const [username, setUsername] = useState(user.username);
     const [firstName, setFirstName] = useState(user.firstName);
     const [lastName, setLastName] = useState(user.lastName);
+    const [errors, setErrors] = useState([]);
 
     const submitHandler = e => {
         console.log('Form submitted!')
@@ -20,6 +21,17 @@ const EditUserDetails = ({ user }) => {
         console.log(payload);
         e.preventDefault();
     }
+
+    // const handleSubmit = (e) => {
+    //     e.preventDefault();
+    //     setErrors([]);
+    //     return dispatch(sessionActions.login({ credential, password }))
+    //         .catch(async (res) => {
+    //             const data = await res.json();
+    //             if (data && data.errors) setErrors(data.errors);
+    //         });
+    // }
+    
     return (
         <>
             <div className='edit-user-details'>

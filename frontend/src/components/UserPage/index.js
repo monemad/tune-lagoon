@@ -23,15 +23,11 @@ const UserPage = ({ users }) => {
                 </div>
                 <div className='user-songs'>
                     <h3>Songs</h3>
-                    <ul className='user-songs-list'>
-                        {user.Songs.map(song => <li key={song.id}><Link to={`/songs/${song.id}`}>{song.title}</Link></li>)}
-                    </ul>
+                    {user.Songs.map(song => <div className='song-div' key={song.id}><Link to={`/songs/${song.id}`}>{song.title}</Link></div>)}
                 </div>
                 <div className='user-playlists'>
                     <h3>Playlists</h3>
-                    <ul className='user-playlists-list'>
-                        {user.Playlists.map(playlist => <li key={playlist.id}><Link to={`/playlists/${playlist.id}`}>{playlist.name}</Link><span>{playlist.Songs.length} songs</span></li>)}
-                    </ul>
+                    {user.Playlists.map(playlist => <div className='playlist-div' key={playlist.id}><Link to={`/playlists/${playlist.id}`}>{playlist.name}</Link><span>{playlist.Songs.length} songs</span></div>)}
                 </div>
                 <div className='links'>
                     <Link className='link-to-users' to='/users'>Back to all users</Link>

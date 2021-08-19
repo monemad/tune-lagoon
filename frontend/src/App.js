@@ -16,8 +16,8 @@ import { getPlaylists } from './store/playlists';
 function App() {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
-  const usersSlice = useSelector(state => state.users);
-  const users = Object.values(usersSlice); 
+  // const usersSlice = useSelector(state => state.users);
+  // const users = Object.values(usersSlice); 
   
   useEffect(()=>{
     dispatch(sessionActions.restoreUser())
@@ -42,7 +42,7 @@ function App() {
             <SignupFormPage />
           </Route>
           <Route path='/users'>
-            <UsersPage users={users}/>
+            <UsersPage users/>
           </Route>
           <Route path='/songs'>
             <SongsPage />
