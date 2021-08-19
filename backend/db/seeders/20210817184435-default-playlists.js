@@ -10,7 +10,7 @@ module.exports = {
         userId: 2
       },
       {
-        name: 'Gud songs!',
+        name: 'Gud songs!', 
         private: false,
         userId: 6
       },
