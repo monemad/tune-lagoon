@@ -36,3 +36,13 @@ div.search-results {
     background-color: white;
     border: 1px solid black;
 }
+
+.profile-dropdown {
+    position: absolute;
+    top: 65px;
+    text-align: right;
+}
+
+.profile-dropdown li {
+    list-style: none;
+}

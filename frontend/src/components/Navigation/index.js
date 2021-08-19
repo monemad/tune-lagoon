@@ -46,12 +46,7 @@ function Navigation({ isLoaded }){
                     placeholder='Search here...'
                     value={searchQuery}
                     onChange={e=>setSearchQuery(e.target.value)}/>
-                <SearchResults searchQuery={searchQuery} searchResZI={searchResZI}/>
-                {/* <div 
-                    className='search-results' 
-                    onClick={e=>e.stopPropagation()}
-                    style={{zIndex: searchResZI}}>
-                </div> */}
+                <SearchResults searchQuery={searchQuery} searchResZI={searchResZI} setSearchResZI={setSearchResZI}/>
             </div>
             <div className='nav session-div'>
                 {sessionUser && <NavLink to='/upload'>Upload</NavLink>}

@@ -16,10 +16,10 @@ const UserPage = ({ users }) => {
                 <h2>{user.username}</h2>
                 <div className='user-details'>
                     <p>{user.firstName} {user.lastName}</p>
-                    {authorized ? <Link to={`/users/${user.id}/edit`}>Edit Profile</Link> : <></>}
+                    { authorized && <><Link to={`/users/${user.id}/edit`}>Edit Profile</Link>
                     <Route path='/users/:userId/edit'>
                         <EditUserDetails user={user}/>
-                    </Route>
+                    </Route></> }
                 </div>
                 <div className='user-songs'>
                     <h3>Songs</h3>
