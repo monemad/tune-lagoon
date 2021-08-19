@@ -16,7 +16,7 @@ module.exports = {
         allowNull: false,
         type: Sequelize.INTEGER
       },
-      songURl: {
+      songUrl: {
         allowNull: false,
         type: Sequelize.STRING(256)
       },

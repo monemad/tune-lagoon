@@ -116,6 +116,7 @@ module.exports = (sequelize, DataTypes) => {
       otherKey: 'songId'
     };
     User.hasMany(models.Song, { foreignKey: 'userId' });
+    User.hasMany(models.Comment, { foreignKey: 'userId' });
     User.belongsToMany(models.Song, columnMappingSong);
     User.hasMany(models.Playlist, { foreignKey: 'userId' });
   };
