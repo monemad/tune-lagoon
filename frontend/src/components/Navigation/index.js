@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import ProfileButton from './ProfileButton';
+import SearchResults from './SearchResults';
 import './Navigation.css';
 
 function Navigation({ isLoaded }){
@@ -45,12 +46,7 @@ function Navigation({ isLoaded }){
                     placeholder='Search here...'
                     value={searchQuery}
                     onChange={e=>setSearchQuery(e.target.value)}/>
-                <div 
-                    className='search-results' 
-                    onClick={e=>e.stopPropagation()}
-                    style={{zIndex: searchResZI}}>
-
-                </div>
+                <SearchResults searchQuery={searchQuery} searchResZI={searchResZI} setSearchResZI={setSearchResZI}/>
             </div>
             <div className='nav session-div'>
                 {sessionUser && <NavLink to='/upload'>Upload</NavLink>}
