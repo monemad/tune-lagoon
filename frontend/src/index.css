@@ -5,19 +5,19 @@ body {
     background-color: rgba(46, 139, 87, 0.4);
 }
 
-
-
 footer {
     position: fixed;
     bottom: 0px;
+    width: inherit;
 }
 
 footer div {
     display: flex;
+    
 }
 
 div#root {
     height: 100vh;
     background-color: white;
-    padding: 1em 2em;
+    padding: 0 2em;
 }

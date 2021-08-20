@@ -1,7 +1,7 @@
 import { useState } from "react";
-
-const { Link } = require("react-router-dom")
-
+import { Link, useHistory } from "react-router-dom"
+import { useDispatch, useSelector } from "react-redux";
+import { updateUserProfile } from "../../store/users";
 
 
 const EditUserDetails = ({ user }) => {
@@ -10,32 +10,34 @@ const EditUserDetails = ({ user }) => {
     const [firstName, setFirstName] = useState(user.firstName);
     const [lastName, setLastName] = useState(user.lastName);
     const [errors, setErrors] = useState([]);
+    const dispatch = useDispatch();
+    const history = useHistory();
 
     const submitHandler = e => {
-        console.log('Form submitted!')
+        e.preventDefault();
         const payload = {
+            id: user.id,
             username,
             firstName,
             lastName
         }
-        console.log(payload);
-        e.preventDefault();
+        setErrors([]);
+        dispatch(updateUserProfile(payload))
+            .then(() => history.push(`/users/${user.id}`))
+            .catch(async (res) => {
+                const data = await res.json();
+                if (data && data.errors) setErrors(data.errors);
+            });
+        
     }
-
-    // const handleSubmit = (e) => {
-    //     e.preventDefault();
-    //     setErrors([]);
-    //     return dispatch(sessionActions.login({ credential, password }))
-    //         .catch(async (res) => {
-    //             const data = await res.json();
-    //             if (data && data.errors) setErrors(data.errors);
-    //         });
-    // }
     
     return (
         <>
             <div className='edit-user-details'>
                 <form onSubmit={submitHandler}>
+                    <ul>
+                        {errors.map((error, idx) => <li key={idx}>{error}</li>)}
+                    </ul>
                     <div>
                         <label htmlFor='username'>Username: </label>
                         <input id='username' value={username} onChange={e => setUsername(e.target.value)}></input>
