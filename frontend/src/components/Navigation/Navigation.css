@@ -46,3 +46,8 @@ div.search-results {
 .profile-dropdown li {
     list-style: none;
 }
+
+.match {
+    font-weight: bold;
+    background-color: rgba(46, 139, 87, 0.2);
+}

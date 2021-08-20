@@ -1,6 +1,9 @@
+import { csrfFetch } from "./csrf";
+
 // action types 
 const LOAD_USERS = 'users/LOAD_USERS';
 const ADD_USER = 'users/ADD_USER';
+const UPDATE_USER = 'users/UPDATE_USER';
 
 // action creators must return an action object
 const loadUsers = users => ({
@@ -13,6 +16,11 @@ export const addUser = user => ({
     user
 })
 
+const updateUser = user => ({
+    type: UPDATE_USER,
+    user
+})
+
 // thunk action creator
 export const getUsers  = () => async (dispatch) => {
     // make a fetch request to users api 
@@ -22,6 +30,28 @@ export const getUsers  = () => async (dispatch) => {
         const users = await response.json();
         dispatch(loadUsers(users));
     }
+    return response;
+}
+
+export const updateUserProfile = userData => async (dispatch) => {
+    const { id, username, firstName, lastName } = userData;
+    const response = await csrfFetch(`/api/users/${id}`, {
+        method: 'put',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            username,
+            firstName,
+            lastName
+        })
+    });
+
+    if (response.ok){
+        const updatedUser = await response.json();
+        dispatch(updateUser(updatedUser));
+    }
+
 }
 
 const initialState = {};
@@ -37,6 +67,8 @@ const usersReducer = (state = initialState, action) => {
             return newState;
         case ADD_USER:
             return { ...state, [action.user.id]: action.user }
+        case UPDATE_USER:
+            return {...state, [action.user.id]: {...state[action.user.id], ...action.user}}
         default: 
             return state;
     }
