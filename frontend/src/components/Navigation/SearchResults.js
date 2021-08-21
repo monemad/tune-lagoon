@@ -7,14 +7,14 @@ const SearchResults = ({ searchQuery, searchResZI, setSearchResZI }) => {
     const songs = Object.values(state.songs);
     const playlists = Object.values(state.playlists);
 
-    const usersResults = users.filter(user => user.username.toUpperCase().includes(searchQuery.toUpperCase()));
+    const usersResults = users?.filter(user => user.username?.toUpperCase().includes(searchQuery?.toUpperCase()));
 
-    const songsResults = songs.filter(song => song.title.toUpperCase().includes(searchQuery.toUpperCase()));
+    const songsResults = songs?.filter(song => song.title?.toUpperCase().includes(searchQuery?.toUpperCase()));
 
-    const playlistsResults = playlists.filter(playlist => playlist.name.toUpperCase().includes(searchQuery.toUpperCase()));
+    const playlistsResults = playlists?.filter(playlist => playlist.name?.toUpperCase().includes(searchQuery?.toUpperCase()));
 
     const formatResult = result => {
-        const index = result.toUpperCase().indexOf(searchQuery.toUpperCase());
+        const index = result.toUpperCase().indexOf(searchQuery?.toUpperCase());
         const len = searchQuery.length;
 
         const subStringOne = result.slice(0, index);
@@ -35,19 +35,19 @@ const SearchResults = ({ searchQuery, searchResZI, setSearchResZI }) => {
             <div className='users-results'>
                 <h4>Users:</h4>
                 <ul>
-                    {usersResults.length ? usersResults.map(user => <li><Link key={user.id} to={`/users/${user.id}`} onClick={e=>setSearchResZI(-1)}>{formatResult(user.username)}</Link></li>) : <li>No users found</li>}      
+                    {usersResults.length ? usersResults.map(user => <li key={`user${user.id}`}><Link to={`/users/${user.id}`} onClick={e=>setSearchResZI(-1)}>{formatResult(user.username)}</Link></li>) : <li>No users found</li>}      
                 </ul>
             </div>
             <div className='songs-results'>
                 <h4>Songs:</h4>
                 <ul>
-                    {songsResults.length ? songsResults.map(song => <li><Link key={song.id} to={`/songs/${song.id}`} onClick={e=>setSearchResZI(-1)}>{formatResult(song.title)}</Link></li>) : <li>No songs found</li>}      
+                    {songsResults.length ? songsResults.map(song => <li key={`song${song.id}`}><Link to={`/songs/${song.id}`} onClick={e=>setSearchResZI(-1)}>{formatResult(song.title)}</Link></li>) : <li>No songs found</li>}      
                 </ul>
             </div>
             <div className='playlists-results'>
                 <h4>Playlists:</h4>
                 <ul>
-                    {playlistsResults.length ? playlistsResults.map(playlist => <li><Link key={playlist.id} to={`/playlists/${playlist.id}`} onClick={e=>setSearchResZI(-1)}>{formatResult(playlist.name)}</Link></li>) : <li>No playlists found</li>}      
+                    {playlistsResults.length ? playlistsResults.map(playlist => <li key={`playlist${playlist.id}`}><Link to={`/playlists/${playlist.id}`} onClick={e=>setSearchResZI(-1)}>{formatResult(playlist.name)}</Link></li>) : <li>No playlists found</li>}      
                 </ul>     
             </div>
         </div>

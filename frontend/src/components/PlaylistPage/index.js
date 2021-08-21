@@ -8,9 +8,9 @@ const PlaylistPage = ({ playlists }) => {
         <> { playlist && 
             <div className='playlist-page'>
                 <h2>{playlist.name}</h2>
-                <p>Made by {playlist.User.username}</p>
+                <p>Made by {playlist.User?.username}</p>
                 <ul className='playlist-songs-list'>
-                    {playlist.Songs.map(song => <li className='playlist-songs-list-item' key={song.id}><Link to={`/songs/${song.id}`}>{song.title}</Link></li>)}
+                    {playlist.Songs?.map(song => <li className='playlist-songs-list-item' key={song.id}><Link to={`/songs/${song.id}`}>{song.title}</Link></li>)}
                 </ul>
             </div>
         } </>

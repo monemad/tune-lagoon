@@ -87,7 +87,6 @@ router.post(
 
 // Update a user by ID
 router.put('/:id', validateEdit, asyncHandler(async (req, res) => {
-    console.log("MADE IT INTO PUT ROUTE FOR UPDATING USER")
     const id = +req.params.id;
     const user = await User.findByPk(id);
     
@@ -102,18 +101,3 @@ router.put('/:id', validateEdit, asyncHandler(async (req, res) => {
 }));
 
 module.exports = router;
-
-// fetch('/api/users/3', {
-//     method: 'put',
-//     headers: {
-//         "Content-Type": "application/josn",
-//         "XSRF-Token": "5rkggQee-LkZ7AHgq673_GvH7GopWmAB6HLY"
-//     },
-//     body: JSON.stringify({
-//         username: "kmartinw",
-//         firstName: "Kris",
-//         lastName: "Martin",
-//         avatarUrl: "thisisnewURL",
-//         newPassword: "newpassword"
-//     })
-// })

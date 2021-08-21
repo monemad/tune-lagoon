@@ -1,15 +1,24 @@
 import React from 'react'
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { Route, useParams } from 'react-router';
 import { Link } from 'react-router-dom';
 import EditUserDetails from '../EditUserDetails';
 import CreatePlaylistForm from '../CreatePlaylistForm';
+import { destroyPlaylist } from '../../store/playlists';
+import { getUsers } from '../../store/users';
 
 const UserPage = ({ users }) => {
     const session = useSelector(state => state.session);
     const { userId } = useParams();
     const user = users.find(user => user.id === +userId)
     const authorized = user && session.user.id === user.id;
+    const dispatch = useDispatch();
+
+    const deletePlaylist = (e) => {
+        console.log('implement delete');
+        dispatch(destroyPlaylist(e.target.id));
+        dispatch(getUsers());
+    }
 
     return (
         <> { user && 
@@ -30,7 +39,7 @@ const UserPage = ({ users }) => {
                 </div>
                 <div className='user-playlists'>
                     <h3>Playlists</h3>
-                    {user.Playlists.map(playlist => <div className='playlist-div' key={playlist.id}><Link to={`/playlists/${playlist.id}`}>{playlist.name}</Link><span>{playlist.Songs.length} songs</span></div>)}
+                    {user.Playlists.map(playlist => <div className='playlist-div' key={playlist.id}><Link to={`/playlists/${playlist.id}`}>{playlist.name}</Link><span>{playlist.Songs.length} songs</span><span id={playlist.id} onClick={deletePlaylist}>delete</span></div>)}
                     { authorized && <>
                         <Link to={`/users/${user.id}/create-playlist`}><button>Create a Playlist</button></Link>
                         <Route path='/users/:userId/create-playlist'>

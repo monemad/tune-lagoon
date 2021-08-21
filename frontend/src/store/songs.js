@@ -28,12 +28,10 @@ export const getSongs  = () => async (dispatch) => {
     }
 }
 
-export const uploadSong = song => async (dispatch) => {
-    console.log("SONG ------->", song)
+export const uploadSong = song => async () => {
     const formData = new FormData();
     formData.append('song', song);
-    console.log("FORMDATA --------->", ...formData)
-    const response = await csrfFetch('/api/songs', {
+    const response = await csrfFetch('/api/songs/upload', {
         method: 'post',
         headers: {
             'Content-Type': "multipart/form-data"
@@ -42,9 +40,23 @@ export const uploadSong = song => async (dispatch) => {
     })
 
     if (response.ok) {
-        const createdSong = await response.json();
-        console.log("Created Song", createdSong);
-        return createdSong;
+        const songUrl = await response.json();
+        return songUrl;
+    }
+}
+
+export const createSong = songData => async(dispatch) => {
+    const response = await csrfFetch('/api/songs', {
+        method: 'post', 
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(songData)
+    });
+
+    if (response.ok) {
+        const newSong = await response.json();
+        dispatch(addSong(newSong));
     }
 }
 
