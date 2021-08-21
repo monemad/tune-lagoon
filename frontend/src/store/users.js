@@ -24,6 +24,7 @@ const updateUser = user => ({
 // thunk action creator
 export const getUsers  = () => async (dispatch) => {
     // make a fetch request to users api 
+    console.log('in the getUsers thunk')
     const response = await fetch('/api/users');
 
     if (response.ok) {

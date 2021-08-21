@@ -12,14 +12,19 @@ router.get('/', asyncHandler(async (req, res) => {
         include: [ User, {model: Comment, include: User}, Genre, 'SongVotes' ]
     })
     return res.json(songs);
-}))
+}));
 
-router.post('/', singleMulterUpload('song'), asyncHandler(async (req, res) => {
-    console.log('REQ.FILE ------------->', req.file)
-    // const song = req.file;
+router.post('/upload', singleMulterUpload('song'), asyncHandler(async (req, res) => {
     const songUrl = await singlePublicFileUpload(req.file);
     res.json(songUrl);
-    
+}));
+
+router.post('/', asyncHandler(async (req, res) => {
+    const newSong = await Song.create(req.body);
+    const detailedSong = await Song.findByPk(newSong.id, {
+        include: [ User, {model: Comment, include: User}, Genre, 'SongVotes' ]
+    });
+    res.json(detailedSong);
 }))
 
 module.exports = router;
