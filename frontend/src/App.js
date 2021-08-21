@@ -19,7 +19,7 @@ function App() {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
   // const [nowPlaying, setNowPlaying] = useState('')
-  const { nowPlaying, setNowPlaying } = useNowPlaying
+  const { nowPlaying, setNowPlaying } = useNowPlaying();
   // const usersSlice = useSelector(state => state.users);
   // const users = Object.values(usersSlice); 
   
