@@ -57,6 +57,32 @@ export const destroyPlaylist = id => async (dispatch) => {
     }
 }
 
+export const addSongToPlaylist = data => async(dispatch) => {
+    const response = await csrfFetch('/api/playlists/add-song', {
+        method: 'post',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    });
+
+    if (response.ok) {
+        const playlists = await response.json();
+        dispatch(loadPlaylists(playlists))
+    }
+}
+
+export const removeSongFromPlaylist = data => async(dispatch) => {
+    const response = await csrfFetch(`/api/playlists/${data.playlistId}/${data.songId}`, {
+        method: 'delete'
+    });
+
+    if (response.ok) {
+        const playlists = await response.json();
+        dispatch(loadPlaylists(playlists))
+    }
+} 
+
 const initialState = {};
 
 // the playlists reducer

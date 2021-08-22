@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Route, Switch } from 'react-router-dom';
 import AudioPlayer from 'react-h5-audio-player'
 import LoginFormPage from './components/LoginFormPage';
@@ -22,6 +22,8 @@ function App() {
   const { nowPlaying, setNowPlaying } = useNowPlaying();
   // const usersSlice = useSelector(state => state.users);
   // const users = Object.values(usersSlice); 
+  const session = useSelector(state=>state.session);
+  const authenticated = session?.user;
   
   useEffect(()=>{
     dispatch(sessionActions.restoreUser())
@@ -55,7 +57,11 @@ function App() {
             <PlaylistsPage />
           </Route>
           <Route path='/upload'>
-            <UploadSongForm setNowPlaying={setNowPlaying}/>
+            { authenticated ? 
+              <UploadSongForm setNowPlaying={setNowPlaying}/>
+              :
+              <p>You must login to do that!</p>
+            }
           </Route>
           <Route>
             Page Not Found! 😥
