@@ -4,6 +4,7 @@ import { Route, useParams } from 'react-router';
 import { Link } from 'react-router-dom';
 import EditUserDetails from '../EditUserDetails';
 import CreatePlaylistForm from '../CreatePlaylistForm';
+import SongContainer from '../SongContainer';
 import { destroyPlaylist } from '../../store/playlists';
 import { getUsers } from '../../store/users';
 
@@ -35,7 +36,8 @@ const UserPage = ({ users }) => {
                 </div>
                 <div className='user-songs'>
                     <h3>Songs</h3>
-                    {user.Songs.map(song => <div className='song-div' key={song.id}><Link to={`/songs/${song.id}`}>{song.title}</Link></div>)}
+                    {/* {user.Songs.map(song => <div className='song-div' key={song.id}><Link to={`/songs/${song.id}`}>{song.title}</Link></div>)} */}
+                    {user.Songs.map(song => <SongContainer song={song} />)}
                 </div>
                 <div className='user-playlists'>
                     <h3>Playlists</h3>
