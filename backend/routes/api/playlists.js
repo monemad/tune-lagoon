@@ -4,7 +4,7 @@ const { check } = require('express-validator');
 
 const { handleValidationErrors } = require('../../utils/validation');
 
-const { Song, Playlist, User } = require('../../db/models');
+const { Song, Playlist, User, Song_Playlist_Join } = require('../../db/models');
 
 const router = express.Router();
 
@@ -38,6 +38,30 @@ router.delete('/:id', asyncHandler(async (req, res) => {
     });
     playlist.destroy();
     res.json({message: "Successfully deleted!"});
+}))
+
+router.post('/add-song', asyncHandler(async (req, res) => {
+    await Song_Playlist_Join.create(req.body);
+    const playlists = await Playlist.findAll({
+        include: [ Song, User ]
+    });
+    return res.json(playlists);
+}))
+
+router.delete('/:playlistId/:songId', asyncHandler(async (req,res) => {
+    const playlistId = +req.params.playlistId;
+    const songId = +req.params.songId;
+    const join = await Song_Playlist_Join.findOne({
+        where: {
+            playlistId,
+            songId
+        }
+    });
+    join.destroy();
+    const playlists = await Playlist.findAll({
+        include: [ Song, User ]
+    });
+    return res.json(playlists);
 }))
 
 module.exports = router;

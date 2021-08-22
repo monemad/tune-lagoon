@@ -3,6 +3,10 @@ body {
     margin: 0;
     padding: 0 25%;
     background-color: rgba(46, 139, 87, 0.4);
+    /* background-image: url(https://images.pexels.com/photos/2397653/pexels-photo-2397653.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260); */
+    /* background-image: url(https://images.pexels.com/photos/1001682/pexels-photo-1001682.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260); */
+    /* background-size: auto; */
+    /* background: linear-gradient(rgba(46, 139, 87, 1), rgba(0, 0, 139, 1)) */
 }
 
 footer {
@@ -20,4 +24,23 @@ div#root {
     height: 100vh;
     background-color: white;
     padding: 0 2em;
+}
+
+div#root > div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+a {
+    text-decoration: none;
+    color: seagreen;
+    cursor: pointer;
+}
+
+.user-songs {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%
 }

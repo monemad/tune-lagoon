@@ -36,8 +36,7 @@ const UserPage = ({ users }) => {
                 </div>
                 <div className='user-songs'>
                     <h3>Songs</h3>
-                    {/* {user.Songs.map(song => <div className='song-div' key={song.id}><Link to={`/songs/${song.id}`}>{song.title}</Link></div>)} */}
-                    {user.Songs.map(song => <SongContainer song={song} />)}
+                    {user.Songs.map(song => <SongContainer key={song.id} song={song} />)}
                 </div>
                 <div className='user-playlists'>
                     <h3>Playlists</h3>
