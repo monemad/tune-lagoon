@@ -1,4 +1,5 @@
 import { Link, useParams } from "react-router-dom";
+import SongContainer from '../SongContainer';
 
 const PlaylistPage = ({ playlists }) => {
     const { playlistId } = useParams();
@@ -10,7 +11,7 @@ const PlaylistPage = ({ playlists }) => {
                 <h2>{playlist.name}</h2>
                 <p>Made by {playlist.User?.username}</p>
                 <ul className='playlist-songs-list'>
-                    {playlist.Songs?.map(song => <li className='playlist-songs-list-item' key={song.id}><Link to={`/songs/${song.id}`}>{song.title}</Link></li>)}
+                    {playlist.Songs?.map(song => <SongContainer song={song} />)}
                 </ul>
             </div>
         } </>

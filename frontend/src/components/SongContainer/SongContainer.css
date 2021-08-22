@@ -1,0 +1,11 @@
+.song-div {
+    display: flex;
+    width: 80%;
+    justify-content: space-between;
+}
+
+.song-details-div {
+    display: flex;
+    width: 50%;
+    justify-content: space-between;
+}

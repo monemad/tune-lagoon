@@ -3,6 +3,7 @@ import { csrfFetch } from "./csrf";
 // action types 
 const LOAD_SONGS = 'songs/LOAD_SONGS';
 const ADD_SONG = 'songs/ADD_SONG';
+const REMOVE_SONG = 'songs/REMOVE_SONG';
 
 // action creators must return an action object
 const loadSongs = songs => ({
@@ -10,9 +11,14 @@ const loadSongs = songs => ({
     songs
 })
 
-export const addSong = song => ({
+const addSong = song => ({
     type: ADD_SONG,
     song
+})
+
+const removeSong = id => ({
+    type: REMOVE_SONG,
+    id
 })
 
 // thunk action creator
@@ -73,6 +79,8 @@ const songsReducer = (state = initialState, action) => {
             return newState;
         case ADD_SONG:
             return { ...state, [action.song.id]: action.song }
+        case REMOVE_SONG:
+            delete {...state}[action.id];
         default: 
             return state;
     }

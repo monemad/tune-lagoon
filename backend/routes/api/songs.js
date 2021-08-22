@@ -27,4 +27,18 @@ router.post('/', asyncHandler(async (req, res) => {
     res.json(detailedSong);
 }))
 
+router.put('/:id', asyncHandler(async (req, res) => {
+    const song = await Song.findByPk(+req.params.id, {
+        include: [ User, {model: Comment, include: User}, Genre, 'SongVotes' ]
+    });
+    await song.update(req.body);
+    res.json(song);
+}))
+
+router.delete('/:id', asyncHandler(async (req, res) => {
+    const song = await Song.findByPk(+req.params.id);
+    await song.destroy();
+    res.json({ message: 'Successfully deleted!' })
+}))
+
 module.exports = router;
