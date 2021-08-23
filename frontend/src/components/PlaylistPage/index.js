@@ -8,24 +8,28 @@ import "./PlaylistPage.css"
 
 const PlaylistPage = () => {
     const playlists = Object.values(useSelector(state=>state.playlists));
+    const sessionUser = useSelector(state => state.session.user);
     const { playlistId } = useParams();
     const dispatch = useDispatch();
     const playlist = playlists.find(playlist => playlist.id === +playlistId);
     const [removeSong, setRemoveSong] = useState(false);
     const [songToRemove, setSongToRemove] = useState(false);
+    const authorized = playlist?.userId === sessionUser?.id;
+    console.log('authorized', authorized)
 
     const toggleRemovePrompt = id => {
         setRemoveSong(id ? true : false);
         setSongToRemove(id)
     }
 
-    const removeFromPlaylist = e => {
+    const removeFromPlaylist = async e => {
         const payload = {
             songId: songToRemove,
             playlistId: +playlistId
         }
-        dispatch(removeSongFromPlaylist(payload));
-        dispatch(getUsers());
+        await dispatch(getUsers());
+        await dispatch(removeSongFromPlaylist(payload));
+            // .then(() => dispatch(getUsers()))
         setRemoveSong(false);
         setSongToRemove(false);
     }
@@ -45,7 +49,7 @@ const PlaylistPage = () => {
                                 <button onClick={e=>toggleRemovePrompt(false)}>No</button>
                             </>
                             :
-                            <span onClick={e=>toggleRemovePrompt(song.id)}>⛔</span>
+                            authorized && <span onClick={e=>toggleRemovePrompt(song.id)}>⛔</span>
                         }
                         <SongContainer song={song} />
                     </div>)}

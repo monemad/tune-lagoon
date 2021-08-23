@@ -1,4 +1,5 @@
 import { csrfFetch } from "./csrf";
+const rfdc = require('rfdc')();
 
 // action types 
 const LOAD_USERS = 'users/LOAD_USERS';
@@ -59,6 +60,7 @@ const initialState = {};
 
 // the users reducer
 const usersReducer = (state = initialState, action) => {
+    let stateCopy = rfdc(state);
     switch(action.type) {
         case LOAD_USERS:
             const newState = {};
@@ -67,7 +69,9 @@ const usersReducer = (state = initialState, action) => {
             })
             return newState;
         case ADD_USER:
-            return { ...state, [action.user.id]: action.user }
+            stateCopy[action.user.id] = action.user
+            return stateCopy;
+            // return { ...state, [action.user.id]: action.user }
         case UPDATE_USER:
             return {...state, [action.user.id]: {...state[action.user.id], ...action.user}}
         default: 

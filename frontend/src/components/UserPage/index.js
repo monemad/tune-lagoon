@@ -15,9 +15,9 @@ const UserPage = ({ users }) => {
     const authorized = user && session.user.id === user.id;
     const dispatch = useDispatch();
 
-    const deletePlaylist = (e) => {
+    const deletePlaylist = async (e) => {
         console.log('implement delete');
-        dispatch(destroyPlaylist(e.target.id));
+        await dispatch(destroyPlaylist(e.target.id));
         dispatch(getUsers());
     }
 

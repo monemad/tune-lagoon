@@ -33,11 +33,15 @@ router.post('/', validatePlaylist, asyncHandler(async (req, res) => {
 }))
 
 router.delete('/:id', asyncHandler(async (req, res) => {
-    const playlist = await Playlist.findByPk(+req.params.id, {
-        include: [ Song, User ]
+    const playlist = await Playlist.findByPk(+req.params.id);
+    const joins = await Song_Playlist_Join.findAll({
+        where: {
+            playlistId: playlist.id
+        }
     });
-    playlist.destroy();
-    res.json({message: "Successfully deleted!"});
+    joins.forEach(async join => await join.destroy())
+    await playlist.destroy();
+    res.json({message: "Successfully deleted"})
 }))
 
 router.post('/add-song', asyncHandler(async (req, res) => {
@@ -57,11 +61,12 @@ router.delete('/:playlistId/:songId', asyncHandler(async (req,res) => {
             songId
         }
     });
-    join.destroy();
-    const playlists = await Playlist.findAll({
+    await join.destroy();
+
+    const playlist = await Playlist.findByPk(playlistId, {
         include: [ Song, User ]
     });
-    return res.json(playlists);
+    return res.json(playlist);
 }))
 
 module.exports = router;

@@ -68,7 +68,7 @@ function App() {
           </Route>
         </Switch>
       )}
-      <footer><AudioPlayer layout='horizontal' src={nowPlaying} /></footer>
+      <footer><AudioPlayer layout='horizontal' src={nowPlaying} volume={0.3} /></footer>
     </>
   );
 }
