@@ -28,10 +28,10 @@ const SongContainer = ({ song }) => {
                     {/* <span className='song-details song-length'>{song.length}</span> */}
                 </div>
                 <div className='waveform'>
-                    wMWWwMMwWwmmWWMmwMW
+                    🌊🌊🌊🌊🌊🌊
                 </div>
                 <div className='playback'>
-                    {nowPlaying !== song.songUrl ? <span onClick={e=>setNowPlaying(song.songUrl)} className='play-button'>▶</span> : <span onClick={e=>setNowPlaying('')}>✖</span>}
+                    {nowPlaying !== song.songUrl ? <i className="fas fa-play" onClick={e=>setNowPlaying(song.songUrl)}></i> : <i className="fas fa-stop" onClick={e=>setNowPlaying('')}></i>}
                 </div>
             </div>}
         </>

@@ -1,3 +1,19 @@
 .playlist-song-container {
     display: flex;
+    align-items: center;
+}
+
+.playlist-songs-list {
+    padding: 0;
+    width: 100%;
+}
+
+.fa-trash-alt {
+    margin-right: 0.5em;
+}
+
+.playlist-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }

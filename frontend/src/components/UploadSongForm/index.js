@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { uploadSong, createSong } from '../../store/songs';
 import { getUsers } from "../../store/users";
+import "./UploadSongForm.css"
 
 const UploadSongForm = ({ setNowPlaying }) => {
     const [title, setTitle] = useState('');
@@ -42,7 +43,7 @@ const UploadSongForm = ({ setNowPlaying }) => {
     }
     
     return (
-        <>
+        <div className='upload-song-page'>
             <h1>Upload file</h1>
         
             {!showWait ? 
@@ -60,8 +61,7 @@ const UploadSongForm = ({ setNowPlaying }) => {
 
             <p>Please wait...</p>
             }
-
-        </>
+        </div>
     )
 }
 

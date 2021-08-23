@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, Redirect } from 'react-router-dom';
 import AudioPlayer from 'react-h5-audio-player'
 import LoginFormPage from './components/LoginFormPage';
 import SignupFormPage from './components/SignupFormPage';
@@ -37,38 +37,40 @@ function App() {
     <>
       <Navigation isLoaded={isLoaded} />
       {isLoaded && (
-        <Switch>
-          <Route exact path='/'>
-            Home
-          </Route>
-          <Route path='/login'>
-            <LoginFormPage />
-          </Route>
-          <Route path='/signup'>
-            <SignupFormPage />
-          </Route>
-          <Route path='/users'>
-            <UsersPage users/>
-          </Route>
-          <Route path='/songs'>
-            <SongsPage />
-          </Route>
-          <Route path='/playlists'>
-            <PlaylistsPage />
-          </Route>
-          <Route path='/upload'>
-            { authenticated ? 
-              <UploadSongForm setNowPlaying={setNowPlaying}/>
-              :
-              <p>You must login to do that!</p>
-            }
-          </Route>
-          <Route>
-            Page Not Found! 😥
-          </Route>
-        </Switch>
+        <main>
+          <Switch>
+            <Route exact path='/'>
+              <Redirect to='/songs'/>
+            </Route>
+            <Route path='/login'>
+              <LoginFormPage />
+            </Route>
+            <Route path='/signup'>
+              <SignupFormPage />
+            </Route>
+            <Route path='/users'>
+              <UsersPage users/>
+            </Route>
+            <Route path='/songs'>
+              <SongsPage />
+            </Route>
+            <Route path='/playlists'>
+              <PlaylistsPage />
+            </Route>
+            <Route path='/upload'>
+              { authenticated ? 
+                <UploadSongForm setNowPlaying={setNowPlaying}/>
+                :
+                <p>You must login to do that!</p>
+              }
+            </Route>
+            <Route>
+              Page Not Found! 😥
+            </Route>
+          </Switch>
+        </main>
       )}
-      <footer><AudioPlayer layout='horizontal' src={nowPlaying} volume={0.3} /></footer>
+      <footer><AudioPlayer onEnded={e=>setNowPlaying('')} layout='horizontal' src={nowPlaying} volume={0.3}/></footer>
     </>
   );
 }

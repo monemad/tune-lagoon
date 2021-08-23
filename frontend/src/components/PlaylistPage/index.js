@@ -49,7 +49,7 @@ const PlaylistPage = () => {
                                 <button onClick={e=>toggleRemovePrompt(false)}>No</button>
                             </>
                             :
-                            authorized && <span onClick={e=>toggleRemovePrompt(song.id)}>⛔</span>
+                            authorized && <i className="fas fa-trash-alt" onClick={e=>toggleRemovePrompt(song.id)}></i>
                         }
                         <SongContainer song={song} />
                     </div>)}

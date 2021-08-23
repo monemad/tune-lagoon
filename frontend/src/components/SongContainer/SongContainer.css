@@ -1,21 +1,34 @@
 .song-div {
     display: flex;
-    width: 80%;
+    width: 100%;
     justify-content: space-between;
-    border-bottom: 1px solid black;
-    margin-bottom: 1em;
+    border-bottom: 1px solid rgba(46, 139, 86, 0.8);
+    /* margin-bottom: 1em; */
+    padding: 1em 0;
+}
+
+.playback, .waveform {
+    display: flex;
+    align-items: center;
 }
 
 .song-details-div {
     display: flex;
     width: 50%;
     justify-content: space-between;
+    align-items: center;
 }
 
 .song-length {
-    color: rgb(165, 165, 165);
+    color: rgba(0, 0, 0, 0.5)
 }
 
-.play-button {
+.fa-play {
     cursor: pointer;
+    color: rgba(46, 139, 86, 0.8);
+}
+
+.fa-stop {
+    cursor: pointer;
+    color: rgba(255, 0, 0, 0.5);
 }

@@ -1,53 +1,100 @@
 nav {
+    position: fixed;
+    top: 0px;
+    left: 0px;
     display: flex;
-    justify-content: space-between;
-    height: 65px;
+    justify-content: space-around;
+    height: 50px;
+    width: 100%;
+    background-color: black;
+    border-bottom: 1px solid rgb(99, 192, 140);
+    box-shadow: 0px 0px 4px 1px rgb(99, 192, 140);
+    padding-left: 20%;
+    padding-right: 20%;
+    z-index: 50;
 }
 
 nav * {
     margin: auto 0;
 }
 
-div.browse-div {
-    width: 20%;
+nav a {
+    /* background-color: red; */
+    height: 100%;
+    margin: auto;
+    color: rgb(99, 192, 140);
+}
+
+.active {
+    text-decoration: underline;
+}
+
+div.home-div, div.browse-div, div.session-div {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.browse-div {
+    width: 25%;
 }
 
 div.search-div {
-    width: 40%;
+    /* background-color: white; */
     position: relative;
+    width: 50%;
+}
+
+.session-div {
+    width: 20%;
 }
 
 input {
     width: 100%;
+    outline: none;
 }
 
-div.session-div {
-    width: 20%;
-    display: flex;
-    justify-content: space-around;
-}
 
 div.search-results {
-    width: 100%;
+
     height: fit-content;
+    width: 100%;
     position: absolute;
+    top: 45px;
     background-color: white;
-    border: 1px solid black;
+    border: 1px solid rgb(99, 192, 140);
+    border-radius: 8px;
+    padding: 0.5em;
+    box-shadow: 0px 0px 4px 1px rgb(99, 192, 140);
+}
+
+div.search-results * {
+    background-color: white;
 }
 
 .profile-dropdown {
     position: absolute;
     top: 65px;
-    text-align: right;
+    left: 74%;
+    text-align: left;
 }
 
 .profile-dropdown li {
     list-style: none;
+    margin: 0.5em 0;
+}
+
+.profile-dropdown a {
+    color: seagreen;
 }
 
 .match {
     font-weight: bold;
     background-color: rgba(46, 139, 87, 0.2);
+}
+
+.fa-user {
+    color: rgb(99, 192, 140);
+    cursor: pointer;
+
 }

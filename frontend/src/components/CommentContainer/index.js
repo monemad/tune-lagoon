@@ -1,4 +1,5 @@
-
+import { Link } from "react-router-dom";
+import "./CommentContainer.css"
 
 const CommentContainer = ({ comment, setNowPlaying, songUrl }) => {
         const timedComment = comment.timeElapsed !== -1;
@@ -27,11 +28,13 @@ const CommentContainer = ({ comment, setNowPlaying, songUrl }) => {
         <>
             {comment && <div className='comment-div'>
                 <div className='comment-details-div'>
-                    { timedComment &&
-                        <a className='comment-details comment-time-elapsed' onClick={skipToTime}>{formatTime(comment.timeElapsed)}</a>
+                    { timedComment ?
+                        <span className='comment-details comment-time-elapsed timed' onClick={skipToTime}>{formatTime(comment.timeElapsed)}</span>
+                        :
+                        <span className='comment-details comment-time-elapsed'>-:--</span>
                     }
                     <span className='comment-details comment-content'>{comment.content}</span>
-                    <a className='comment-details comment-user'>{comment.User.username}</a>
+                    <Link to={`/users/${comment.userId}`} className='comment-details comment-user'>{comment.User.username}</Link>
                 </div>
             </div>}
         </>

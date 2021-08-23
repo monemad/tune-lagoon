@@ -1,0 +1,25 @@
+.user-page {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.playlist-div {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid seagreen;
+    padding: 0.5em 0;
+}
+
+.user-playlists {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.playlist-div > a {
+    width: 75%;
+}

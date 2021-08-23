@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import ProfileButton from './ProfileButton';
 import SearchResults from './SearchResults';
@@ -31,10 +31,14 @@ function Navigation({ isLoaded }){
         );
     }
 
+    const handleSearchBarClick = e => {
+        e.stopPropagation();
+    }
+
     return (
         <nav>
             <div className='nav home-div'>
-                <NavLink exact to="/">Tune Lagoon</NavLink>
+                <Link to="/"><img src='/favicon-32x32.png' alt='logo'></img></Link>
             </div>
             <div className='nav browse-div'>
                 <NavLink to='/songs'>Stream</NavLink>
@@ -45,7 +49,8 @@ function Navigation({ isLoaded }){
                     className='search search-bar' 
                     placeholder='Search here...'
                     value={searchQuery}
-                    onChange={e=>setSearchQuery(e.target.value)}/>
+                    onChange={e=>setSearchQuery(e.target.value)}
+                    onClick={handleSearchBarClick}/>
                 {searchResVis && <SearchResults searchQuery={searchQuery} setSearchResVis={setSearchResVis}/>}
             </div>
             <div className='nav session-div'>
