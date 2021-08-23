@@ -31,3 +31,8 @@
 .comment-details {
     margin: 0 0.5em;
 }
+
+span.comment-details.timed {
+    color: seagreen;
+    cursor: pointer;
+}

@@ -38,7 +38,7 @@ function Navigation({ isLoaded }){
     return (
         <nav>
             <div className='nav home-div'>
-                <Link exact to="/"><img src='/favicon-32x32.png'></img></Link>
+                <Link to="/"><img src='/favicon-32x32.png' alt='logo'></img></Link>
             </div>
             <div className='nav browse-div'>
                 <NavLink to='/songs'>Stream</NavLink>

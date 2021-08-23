@@ -1,4 +1,3 @@
-import { remove } from "js-cookie";
 import { csrfFetch } from "./csrf";
 const rfdc = require('rfdc')();
 

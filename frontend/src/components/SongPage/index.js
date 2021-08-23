@@ -105,7 +105,7 @@ const SongPage = ({ songs }) => {
                         <button onClick={e=>toggleDeleteSongPrompt(false)}>No</button>
                     </>
                     :
-                    song.userId === session.user?.id && <button onClick={e=>toggleDeleteSongPrompt(+songId)}>Delete Song</button>
+                    authorized && <button onClick={e=>toggleDeleteSongPrompt(+songId)}>Delete Song</button>
                 }
                 { authenticated && validPlaylists.length &&
                     <form onSubmit={addSongToPL}>
@@ -130,7 +130,7 @@ const SongPage = ({ songs }) => {
                                     <button onClick={e=>toggleDeleteCommentPrompt(false)}>No</button>
                                 </>
                                 :
-                                comment.userId === session.user?.id && <i class="fas fa-trash-alt" onClick={e=>toggleDeleteCommentPrompt(comment.id)}></i>
+                                comment.userId === session.user?.id && <i className="fas fa-trash-alt" onClick={e=>toggleDeleteCommentPrompt(comment.id)}></i>
                             }
                             <CommentContainer key={comment.id} comment={comment} setNowPlaying={setNowPlaying} songUrl={song.songUrl}/>
                         </div>)}
