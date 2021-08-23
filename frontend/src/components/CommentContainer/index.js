@@ -1,4 +1,4 @@
-
+import "./CommentContainer.css"
 
 const CommentContainer = ({ comment, setNowPlaying, songUrl }) => {
         const timedComment = comment.timeElapsed !== -1;
@@ -27,8 +27,10 @@ const CommentContainer = ({ comment, setNowPlaying, songUrl }) => {
         <>
             {comment && <div className='comment-div'>
                 <div className='comment-details-div'>
-                    { timedComment &&
+                    { timedComment ?
                         <a className='comment-details comment-time-elapsed' onClick={skipToTime}>{formatTime(comment.timeElapsed)}</a>
+                        :
+                        <span className='comment-details comment-time-elapsed'>-:--</span>
                     }
                     <span className='comment-details comment-content'>{comment.content}</span>
                     <a className='comment-details comment-user'>{comment.User.username}</a>

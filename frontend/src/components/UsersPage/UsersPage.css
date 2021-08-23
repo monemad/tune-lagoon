@@ -1,0 +1,7 @@
+.user-div {
+    display: flex;
+    justify-content: center;
+    font-size: 1.2em;
+    border-bottom: 1px solid lightgray;
+    padding: 1em 0;
+}

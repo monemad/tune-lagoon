@@ -37,30 +37,30 @@ router.put('/:id', asyncHandler(async (req, res) => {
 
 router.delete('/:id', asyncHandler(async (req, res) => {
     const songId = +req.params.id;
-    const playlistJoins = await Song_Playlist_Join.findAll({
-        where: {
-            songId
-        }
-    })
-    const genreJoins = await Song_Genre_Join.findAll({
-        where: {
-            songId
-        }
-    })
-    const songComments = await Comment.findAll({
-        where: {
-            songId
-        }
-    })
-    const votes = await Song_Vote.findAll({
-        where: {
-            songId
-        }
-    })
-    playlistJoins.forEach(async join => await join.destroy())
-    genreJoins.forEach(async join => await join.destroy())
-    songComments.forEach(async comment => await comment.destroy())
-    votes.forEach(async vote => await vote.destroy())
+    // const playlistJoins = await Song_Playlist_Join.findAll({
+    //     where: {
+    //         songId
+    //     }
+    // })
+    // const genreJoins = await Song_Genre_Join.findAll({
+    //     where: {
+    //         songId
+    //     }
+    // })
+    // const songComments = await Comment.findAll({
+    //     where: {
+    //         songId
+    //     }
+    // })
+    // const votes = await Song_Vote.findAll({
+    //     where: {
+    //         songId
+    //     }
+    // })
+    // playlistJoins.forEach(async join => await join.destroy())
+    // genreJoins.forEach(async join => await join.destroy())
+    // songComments.forEach(async comment => await comment.destroy())
+    // votes.forEach(async vote => await vote.destroy())
 
     const song = await Song.findByPk(+req.params.id);
     await song.destroy();

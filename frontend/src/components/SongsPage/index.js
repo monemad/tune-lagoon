@@ -11,6 +11,7 @@ const SongsPage = () => {
         <>
             <Route exact path='/songs'>
                 <div className='songs-page'>
+                    <h2>Songs</h2>
                     {songs.map(song => <SongContainer key={song.id} song={song} />)}
                 </div>
             </Route>

@@ -1,0 +1,33 @@
+
+.song-comments * {
+    word-wrap: normal;
+}
+
+.comment-container-div {
+    display: flex;
+    border-bottom-right-radius: 1px solid black;
+    width: 100%;
+    border-bottom: 1px solid gray;
+    padding: 0.5em 0;
+}
+
+.comment-container-div * {
+    display: flex;
+    align-items: center;
+}
+
+.comment-div {
+    width: 100%;
+    
+}
+
+.comment-details-div {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 0.7em;
+}
+
+.comment-details {
+    margin: 0 0.5em;
+}

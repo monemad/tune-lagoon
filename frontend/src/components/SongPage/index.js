@@ -70,6 +70,7 @@ const SongPage = ({ songs }) => {
     }
 
     const deleteSong = async e => {
+        if (nowPlaying === song?.songUrl) setNowPlaying(''); 
         await dispatch(destroySong(+songId));
         await dispatch(getUsers());
         await dispatch(getPlaylists());
@@ -97,9 +98,6 @@ const SongPage = ({ songs }) => {
                 <p>Uploaded by <Link to={`/users/${song.userId}`}>{users?.find(user => user.id === song.userId).username}</Link></p>
                 { nowPlaying !== song.songUrl ? <button onClick={e=>setNowPlaying(song.songUrl)}>Play</button> : <button onClick={e=>setNowPlaying('')}>Stop Playing</button>}
                 <p>{likes} likes</p>
-                { authorized && 
-                    <button>DeleteSong</button>
-                }
                 { deleteSongPrompt ?
                     <>
                         <span>Are you sure?</span>
@@ -132,12 +130,12 @@ const SongPage = ({ songs }) => {
                                     <button onClick={e=>toggleDeleteCommentPrompt(false)}>No</button>
                                 </>
                                 :
-                                comment.userId === session.user?.id && <span onClick={e=>toggleDeleteCommentPrompt(comment.id)}>⛔</span>
+                                comment.userId === session.user?.id && <i class="fas fa-trash-alt" onClick={e=>toggleDeleteCommentPrompt(comment.id)}></i>
                             }
                             <CommentContainer key={comment.id} comment={comment} setNowPlaying={setNowPlaying} songUrl={song.songUrl}/>
                         </div>)}
                     { authenticated &&
-                        <form onSubmit={addComment}>
+                        <form className='comment-form' onSubmit={addComment}>
                             <div>
                                 <input id='comment' value={comment} onChange={e=>setComment(e.target.value)} placeholder='Add a comment' required/>
                             </div>
