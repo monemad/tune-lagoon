@@ -1,6 +1,5 @@
 const express = require('express');
 const asyncHandler = require('express-async-handler');
-const {singleMulterUpload, singlePublicFileUpload} = require('../../awsS3')
 
 const { Comment, Song, User, Genre } = require('../../db/models');
 
@@ -25,8 +24,12 @@ router.put('/:id', asyncHandler(async (req, res) => {
 
 router.delete('/:id', asyncHandler(async (req, res) => {
     const comment = await Comment.findByPk(+req.params.id);
+    const songId = comment.songId;
     await comment.destroy();
-    res.json({ message: 'Successfully deleted!' });
+    const song = await Song.findByPk(songId, {
+        include: [ User, {model: Comment, include: User}, Genre, 'SongVotes' ]
+    });
+    res.json(song);
 }))
 
 module.exports = router;

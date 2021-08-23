@@ -1,9 +1,12 @@
+import { remove } from "js-cookie";
 import { csrfFetch } from "./csrf";
+const rfdc = require('rfdc')();
 
 // action types 
 const LOAD_SONGS = 'songs/LOAD_SONGS';
 const ADD_SONG = 'songs/ADD_SONG';
 const REMOVE_SONG = 'songs/REMOVE_SONG';
+const UPDATE_SONG = 'songs/UPDATE_SONG';
 
 // action creators must return an action object
 const loadSongs = songs => ({
@@ -13,6 +16,11 @@ const loadSongs = songs => ({
 
 const addSong = song => ({
     type: ADD_SONG,
+    song
+})
+
+const updateSong = song => ({
+    type: UPDATE_SONG,
     song
 })
 
@@ -66,10 +74,47 @@ export const createSong = songData => async(dispatch) => {
     }
 }
 
+export const destroySong = id => async(dispatch) => {
+    const response = await csrfFetch(`/api/songs/${id}`, {
+        method: 'delete'
+    });
+
+    if (response.ok) {
+        dispatch(removeSong(id))
+    }
+}
+
+export const addCommentToSong = commentData => async(dispatch) => {
+    const response = await csrfFetch('/api/comments', {
+        method: 'post',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(commentData)
+    })
+
+    if (response.ok) {
+        const song = await response.json();
+        dispatch(updateSong(song));
+    }
+}
+
+export const destroyComment = id => async(dispatch) => {
+    const response = await csrfFetch(`/api/comments/${id}`, {
+        method: 'delete'
+    })
+
+    if (response.ok) {
+        const song = await response.json();
+        dispatch(updateSong(song));
+    }
+}
+
 const initialState = {};
 
 // the songs reducer
 const songsReducer = (state = initialState, action) => {
+    const stateCopy = rfdc(state);
     switch(action.type) {
         case LOAD_SONGS:
             const newState = {};
@@ -78,10 +123,16 @@ const songsReducer = (state = initialState, action) => {
             })
             return newState;
         case ADD_SONG:
-            return { ...state, [action.song.id]: action.song }
+            stateCopy[action.song.id] = action.song;
+            return stateCopy;
         case REMOVE_SONG:
-            delete {...state}[action.id];
-        default: 
+            delete stateCopy[action.id];
+            return stateCopy;
+        case UPDATE_SONG:
+            delete stateCopy[action.song.id];
+            stateCopy[action.song.id] = action.song
+            return stateCopy;
+        default:
             return state;
     }
 }

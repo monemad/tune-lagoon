@@ -8,13 +8,13 @@ import './Navigation.css';
 function Navigation({ isLoaded }){
     const sessionUser = useSelector(state => state.session.user);
     const [searchQuery, setSearchQuery] = useState('');
-    const [searchResZI, setSearchResZI] = useState(-1);
+    const [searchResVis, setSearchResVis] = useState(false);
 
-    document.querySelector('html').addEventListener('click', e=>setSearchResZI(-1));
+    document.querySelector('html').addEventListener('click', e=>setSearchResVis(false));
 
     useEffect(()=>{
-        if (!searchQuery.length) return setSearchResZI(-1);
-        setSearchResZI(2);
+        if (!searchQuery.length) return setSearchResVis(false);
+        setSearchResVis(true);
     }, [searchQuery])
 
     let sessionLinks;
@@ -46,7 +46,7 @@ function Navigation({ isLoaded }){
                     placeholder='Search here...'
                     value={searchQuery}
                     onChange={e=>setSearchQuery(e.target.value)}/>
-                <SearchResults searchQuery={searchQuery} searchResZI={searchResZI} setSearchResZI={setSearchResZI}/>
+                {searchResVis && <SearchResults searchQuery={searchQuery} setSearchResVis={setSearchResVis}/>}
             </div>
             <div className='nav session-div'>
                 {sessionUser && <NavLink to='/upload'>Upload</NavLink>}
