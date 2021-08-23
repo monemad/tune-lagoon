@@ -28,20 +28,26 @@ module.exports = (sequelize, DataTypes) => {
       as: 'SongVotes',
       through: 'Song_Vote',
       foreignKey: 'songId', 
-      otherKey: 'userId'
+      otherKey: 'userId', 
+      onDelete: 'CASCADE', 
+      hooks: true 
     };
     const columnMappingPlaylist = {
       through: 'Song_Playlist_Join',
       foreignKey: 'songId',
-      otherKey: 'playlistId'
+      otherKey: 'playlistId', 
+      onDelete: 'CASCADE', 
+      hooks: true 
     };
     const columnMappingGenre = {
       through: 'Song_Genre_Join',
       foreignKey: 'songId',
-      otherKey: 'genreId'
+      otherKey: 'genreId', 
+      onDelete: 'CASCADE', 
+      hooks: true 
     };
     Song.belongsTo(models.User, { foreignKey: 'userId' });
-    Song.hasMany(models.Comment, { foreignKey: 'songId' });
+    Song.hasMany(models.Comment, { foreignKey: 'songId', onDelete: 'CASCADE', hooks: true });
     Song.belongsToMany(models.User, columnMappingUser);
     Song.belongsToMany(models.Playlist, columnMappingPlaylist);
     Song.belongsToMany(models.Genre, columnMappingGenre);

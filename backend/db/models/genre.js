@@ -11,7 +11,9 @@ module.exports = (sequelize, DataTypes) => {
     const columnMappingSong = {
       through: 'Song_Genre_Join',
       foreignKey: 'genreId',
-      otherKey: 'songId'
+      otherKey: 'songId', 
+      onDelete: 'CASCADE', 
+      hooks: true 
     };
     Genre.belongsToMany(models.Song, columnMappingSong)
   };

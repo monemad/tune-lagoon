@@ -113,12 +113,14 @@ module.exports = (sequelize, DataTypes) => {
       as: 'LikedSongs',
       through: 'Song_Vote',
       foreignKey: 'userId', 
-      otherKey: 'songId'
+      otherKey: 'songId', 
+      onDelete: 'CASCADE', 
+      hooks: true 
     };
-    User.hasMany(models.Song, { foreignKey: 'userId' });
-    User.hasMany(models.Comment, { foreignKey: 'userId' });
+    User.hasMany(models.Song, { foreignKey: 'userId', onDelete: 'CASCADE', hooks: true  });
+    User.hasMany(models.Comment, { foreignKey: 'userId', onDelete: 'CASCADE', hooks: true  });
     User.belongsToMany(models.Song, columnMappingSong);
-    User.hasMany(models.Playlist, { foreignKey: 'userId' });
+    User.hasMany(models.Playlist, { foreignKey: 'userId', onDelete: 'CASCADE', hooks: true  });
   };
 
   return User;
