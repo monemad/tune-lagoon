@@ -91,6 +91,7 @@ div.search-results * {
 .match {
     font-weight: bold;
     background-color: rgba(46, 139, 87, 0.2);
+    color: seagreen;
 }
 
 .fa-user {
