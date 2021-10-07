@@ -2,7 +2,7 @@
 
 [Live Link](https://tune-lagoon.herokuapp.com/)
 
-This is a basic SoundCloud clone with a maritime theme. Users can share there auditory creations with the workd for all to enjoy. Make playlits, add songs, comment on other's masterpieces, and upload all your own creations to a secure server hosted on AWS. 
+This is a basic SoundCloud clone with a maritime theme. Users can share their auditory creations with the world for all to enjoy. Make playlists, add songs, comment on other's masterpieces, and upload all your own creations to a secure server hosted on AWS. 
 
 <br/>
 
